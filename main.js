@@ -1,5 +1,5 @@
 require('update-electron-app')()
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
 const createWindow = () => {
@@ -10,6 +10,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'scripts/preload.js'),
     }
   })
+  win.loadURL('https://github.com')
   win.loadFile('index.html')
 }
 
