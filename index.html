@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <title>Dialog</title>
   </head>
   <body>
-    Title: <input id="title"/>
-    <button id="btn" type="button">Set</button>
-    <script src="scripts/renderer.js"></script>
+    <button type="button" id="btn">Choose Image</button>
+    File path: <strong id="filePath"></strong>
+    <img id="image" src="" alt="foo">
+    <script src='scripts/renderer.js'></script>
   </body>
 </html>
