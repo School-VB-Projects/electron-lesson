@@ -6,17 +6,22 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": "Victor BETSCH",
   "licence": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/publisher-github": "^6.1.1",
     "electron": "^24.1.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/School-VB-Projects/electron-lesson.git"
+  },
+  "dependencies": {
+    "update-electron-app": "^2.0.1"
   }
 }
