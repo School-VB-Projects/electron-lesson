@@ -1,6 +1,12 @@
 // require('update-electron-app')()
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
+
+function handleSetTitle(event, title) {
+  const webContents = event.sender
+  const win = BrowserWindow.fromWebContents(webContents)
+  win.setTitle(title)
+}
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -10,10 +16,12 @@ const createWindow = () => {
       preload: path.join(__dirname, 'scripts/preload.js'),
     }
   })
+
   win.loadFile('index.html')
 }
 
 app.whenReady().then(() => {
+  ipcMain.on('set-title', handleSetTitle)
   createWindow()
 
   app.on('activate', () => {
