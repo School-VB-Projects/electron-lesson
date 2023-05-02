@@ -1,9 +1,8 @@
-const btn = document.getElementById('btn')
-const filePathElement = document.getElementById('filePath')
-const img = document.getElementById('image')
+const counter = document.getElementById('counter')
 
-btn.addEventListener('click', async () => {
-  const filePath = await window.electronAPI.openFile()
-  filePathElement.innerText = filePath
-  img.src = filePath
+window.electronAPI.handleCounter((event, value) => {
+  const oldValue = Number(counter.innerText)
+  const newValue = oldValue + value
+  counter.innerText = newValue
+  event.sender.send('counter-value', newValue)
 })

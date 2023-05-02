@@ -2,14 +2,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Dialog</title>
+    <title>Menu Counter</title>
   </head>
   <body>
-    <button type="button" id="btn">Choose Image</button>
-    File path: <strong id="filePath"></strong>
-    <img id="image" src="" alt="foo">
-    <script src='scripts/renderer.js'></script>
+    Current value: <strong id="counter">0</strong>
+    <script src="scripts/renderer.js"></script>
   </body>
 </html>
