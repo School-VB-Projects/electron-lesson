@@ -1,8 +1,14 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const path = require('path')
 
-function createWindow () {
+function handleSetCounter(_event, value) {
+  console.log(value)
+}
+
+function createWindow() {
   const mainWindow = new BrowserWindow({
+    width: 400,
+    height: 400,
     webPreferences: {
       preload: path.join(__dirname, 'scripts/preload.js')
     }
@@ -10,7 +16,16 @@ function createWindow () {
 
   const menu = Menu.buildFromTemplate([
     {
-      label: app.name,
+      label: 'Window',
+      submenu: [
+        { role: 'help' },
+        { role: 'quit' },
+      ]
+    },
+    { role: 'viewMenu' },
+    { role: 'editMenu' },
+    {
+      label: 'Counter',
       submenu: [
         {
           click: () => mainWindow.webContents.send('update-counter', 1),
@@ -19,23 +34,25 @@ function createWindow () {
         {
           click: () => mainWindow.webContents.send('update-counter', -1),
           label: 'Decrement'
-        }
+        },
+        { type: 'separator' },
+        {
+          label: 'Toggle logs',
+          type: 'checkbox',
+          checked: true
+        },
       ]
-    }
-
+    },
   ])
 
   Menu.setApplicationMenu(menu)
   mainWindow.loadFile('index.html')
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
-  ipcMain.on('counter-value', (_event, value) => {
-    console.log(value) // will print value to Node console
-  })
+  ipcMain.on('counter-value', handleSetCounter)
   createWindow()
 
   app.on('activate', function () {
